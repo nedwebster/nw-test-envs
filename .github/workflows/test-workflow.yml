@@ -25,13 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ needs.SetEnvironment.output.workflow_environment }}
     steps:
-
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.8"
-    - name: Run Code
-      run: sh my_script.sh
+    - name: Use variables
+      run: |
+        echo "repository variable : $REPOSITORY_VAR"
       env:
-        TEST_ENV_VAR: ${{ vars.TEST_ENV_VAR }}
+        REPOSITORY_VAR: ${{ vars.TEST_ENV_VAR }}
