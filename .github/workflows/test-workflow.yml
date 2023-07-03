@@ -24,12 +24,10 @@ jobs:
     needs: SetEnvironment
     runs-on: ubuntu-latest
     #environment: ${{ needs.SetEnvironment.output.workflow_environment }}
-    environment: ${GITHUB_REF#refs/heads/}
+    environment: "${GITHUB_REF#refs/heads/}"
     steps:
     - name: Use variables
       run: |
-        echo "workflow environment: $WORKFLOW_ENVIRONMENT"
         echo "repository variable : $REPOSITORY_VAR"
       env:
         REPOSITORY_VAR: ${{ vars.TEST_ENV_VAR }}
-        WORKFLOW_ENVIRONMENT: ${{ needs.SetEnvironment.output.workflow_environment }}
