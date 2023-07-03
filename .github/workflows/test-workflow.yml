@@ -36,4 +36,5 @@ jobs:
       - name: Print env var
         shell: bash
         run: |
+          echo "I AM RUNNING MY CODE"
           echo ${{ env.TEST_ENV_VAR }}
