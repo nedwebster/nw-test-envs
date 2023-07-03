@@ -28,6 +28,9 @@ jobs:
     steps:
     - name: Use variables
       run: |
+        echo "workflow environment: $WORKFLOW_ENVIRONMENT"
         echo "repository variable : $REPOSITORY_VAR"
       env:
         REPOSITORY_VAR: ${{ vars.TEST_ENV_VAR }}
+      env:
+        WORKFLOW_ENVIRONMENT: ${{ needs.SetEnvironment.output.workflow_environment }}
