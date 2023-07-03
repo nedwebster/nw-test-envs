@@ -30,6 +30,7 @@ jobs:
 
   RunCode:
     name: Run Code
+    needs: SetEnvironment
     runs-on: ubuntu-latest
     environment: ${{ needs.SetEnvironment.output.workflow_environment }}
     steps:
