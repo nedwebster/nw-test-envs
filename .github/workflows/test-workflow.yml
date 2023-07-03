@@ -1,4 +1,4 @@
-name: Test Deployment
+name: Deployment
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
       - staging
       - development
 
-  RunCode:
-    name: Run Code
+  DeployCode:
+    name: Deploy Code
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
