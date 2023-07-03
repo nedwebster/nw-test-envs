@@ -38,5 +38,5 @@ jobs:
         shell: bash
         run: |
           echo "I AM RUNNING MY CODE"
-          echo "${{ needs.SetEnvironment.output.workflow_environment }}"
-          echo "${{ env.TEST_ENV_VAR }}"
+          echo "$needs.SetEnvironment.output.workflow_environment"
+          echo "$TEST_ENV_VAR"
