@@ -9,29 +9,23 @@ jobs:
     steps:
       - name: Check Prod
         if: ${{ github.ref == 'refs/heads/main' }}
-        env:
-          GITHUB_ENVIRONMENT: production
         run: |
-          echo "RUNNING IN PROD"
+          echo "MY_ENV=production" >> $GITHUB_ENV
         
       - name: Check Staging
         if: ${{ github.ref == 'refs/heads/staging' }}
-        env:
-          GITHUB_ENVIRONMENT: staging
         run: |
-          echo "RUNNING IN STAGING"
+          echo "MY_ENV=staging" >> $GITHUB_ENV
       
       - name: Check Staging
         if: ${{ github.ref == 'refs/heads/development' }}
-        env:
-          GITHUB_ENVIRONMENT: development
         run: |
-          echo "RUNNING IN DEVELOPMENT"
+          echo "MY_ENV=development" >> $GITHUB_ENV
 
   RunCode:
     name: Run Code
     runs-on: ubuntu-latest
-    environment: ${{ env.GITHUB_ENVIRONMENT }}
+    environment: ${{ env.GITHUB_ENV }}
     steps:
       - name: Print env var
         shell: bash
