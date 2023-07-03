@@ -2,8 +2,6 @@ name: Deployment
 
 on:
   workflow_dispatch:
-    branches:
-      - development
   push:
     branches:
       - main
