@@ -4,24 +4,29 @@ on:
 
 jobs:
   SetEnvironment:
-    name: Basic checks
+    name: Set Environment
     runs-on: ubuntu-latest
     steps:
-      
       - name: Check Prod
         if: ${{ github.ref == 'refs/heads/main' }}
         env:
           GITHUB_ENVIRONMENT: production
-      
+        run: |
+          echo "RUNNING IN PROD"
+        
       - name: Check Staging
         if: ${{ github.ref == 'refs/heads/staging' }}
         env:
           GITHUB_ENVIRONMENT: staging
+        run: |
+          echo "RUNNING IN STAGING"
       
       - name: Check Staging
         if: ${{ github.ref == 'refs/heads/development' }}
         env:
           GITHUB_ENVIRONMENT: development
+        run: |
+          echo "RUNNING IN DEVELOPMENT"
 
   RunCode:
     name: Run Code
