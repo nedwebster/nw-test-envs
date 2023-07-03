@@ -1,40 +1,19 @@
-name: Test Github Environments
+name: Set Env Var
+
 on:
   push:
+    branches:
+      - main
+      - staging
+      - development
 
 jobs:
-  SetEnvironment:
-    name: Set Environment
+  set-env-var:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Prod
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: |
-          echo "MY_ENV=production" >> $GITHUB_ENV
-        
-      - name: Check Staging
-        if: ${{ github.ref == 'refs/heads/staging' }}
-        run: |
-          echo "MY_ENV=staging" >> $GITHUB_ENV
-      
-      - name: Check Staging
-        if: ${{ github.ref == 'refs/heads/development' }}
-        run: |
-          echo "MY_ENV=development" >> $GITHUB_ENV
-      
-      - name: Check Env
-        run: |
-          echo ${{ env.MY_ENV }}
-    outputs:
-      workflow_environemnt: ${{ env.MY_ENV }}
-
-  RunCode:
-    name: Run Code
-    needs: SetEnvironment
-    runs-on: ubuntu-latest
-    environment: ${{ needs.SetEnvironment.output.workflow_environment }}
-    steps:
-      - name: Print env var
-        run: |
-          echo ${{ needs.SetEnvironment.output.workflow_environment}}
-          echo ${{ env.TEST_ENV_VAR }}
+    - name: Set Environment Variable
+      run: echo "ENVIRONMENT=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+    - name: Print Environment Variable
+      run: echo $ENVIRONMENT
+      env:
+        ENVIRONMENT: ${{ env.ENVIRONMENT }}
