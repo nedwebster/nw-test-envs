@@ -21,13 +21,17 @@ jobs:
         if: ${{ github.ref == 'refs/heads/development' }}
         run: |
           echo "MY_ENV=development" >> $GITHUB_ENV
-
-  RunCode:
-    name: Run Code
-    runs-on: ubuntu-latest
-    environment: ${{ env.GITHUB_ENV }}
-    steps:
-      - name: Print env var
-        shell: bash
+      
+      - name: Check Env
         run: |
-          echo ${{ env.TEST_ENV_VAR }}
+          echo ${{ env.MY_ENV }}
+
+  # RunCode:
+  #   name: Run Code
+  #   runs-on: ubuntu-latest
+  #   environment: ${{ env.GITHUB_ENV }}
+  #   steps:
+  #     - name: Print env var
+  #       shell: bash
+  #       run: |
+  #         echo ${{ env.TEST_ENV_VAR }}
