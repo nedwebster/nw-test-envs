@@ -7,23 +7,9 @@ on:
       - staging
       - development
 
-jobs:
-  SetEnvironment:
-    name: SetEnvironment
-    runs-on: ubuntu-latest
-    steps:
-    - name: Set Environment Variable
-      run: echo "ENVIRONMENT=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-    - name: Print Environment Variable
-      run: echo $ENVIRONMENT
-    outputs:
-      workflow_environment: ${{ env.ENVIRONMENT }}
-
   RunCode:
     name: Run Code
-    needs: SetEnvironment
     runs-on: ubuntu-latest
-    #environment: ${{ needs.SetEnvironment.output.workflow_environment }}
     environment:
       name: ${{ github.ref_name }}
     steps:
