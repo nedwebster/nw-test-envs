@@ -24,7 +24,8 @@ jobs:
     needs: SetEnvironment
     runs-on: ubuntu-latest
     #environment: ${{ needs.SetEnvironment.output.workflow_environment }}
-    environment: "${GITHUB_REF#refs/heads/}"
+    environment:
+      name: "${GITHUB_REF#refs/heads/}"
     steps:
     - name: Use variables
       run: |
