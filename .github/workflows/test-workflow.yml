@@ -1,4 +1,4 @@
-name: Set Env Var
+name: Test Deployment
 
 on:
   push:
@@ -8,16 +8,30 @@ on:
       - development
 
 jobs:
-  set-env-var:
+  SetEnvironment:
+    name: Set Environment
     runs-on: ubuntu-latest
     steps:
     - name: Set Environment Variable
       run: echo "ENVIRONMENT=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
     - name: Print Environment Variable
       run: echo $ENVIRONMENT
+    outputs:
+      workflow_environemnt: ${{ env.ENVIRONMENT }}
+
+  RunCode:
+    name: Run Code
+    needs: SetEnvironment
+    runs-on: ubuntu-latest
+    environment: ${{ needs.SetEnvironment.output.workflow_environment }}
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.8"
+    - name: Run Code
+      run: python test_file.py
       env:
-        ENVIRONMENT: ${{ env.ENVIRONMENT }}
-    
-    - name: Env Based Thing!
-      environment: ${{ env.ENVIRONMENT }}
-      run: echo "Hello"
+        TEST_ENV_VAR: ${{ env.TEST_ENV_VAR }}
