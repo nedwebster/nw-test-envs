@@ -3,9 +3,9 @@ name: Deployment
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
-      - staging
+    # branches:
+    #   - main
+    #   - staging
 
 jobs:
   DeployCode:
