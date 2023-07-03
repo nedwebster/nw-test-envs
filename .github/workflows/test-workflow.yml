@@ -1,0 +1,21 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - development
+
+jobs:
+  DeployCode:
+    name: Deploy Code
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name }}
+    steps:
+    - name: Use variables
+      run: |
+        echo "repository variable : $REPOSITORY_VAR"
+      env:
+        REPOSITORY_VAR: ${{ vars.TEST_ENV_VAR }}
