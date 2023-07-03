@@ -32,6 +32,6 @@ jobs:
       with:
         python-version: "3.8"
     - name: Run Code
-      run: python test_file.py
+      run: sh my_script.sh
       env:
         TEST_ENV_VAR: ${{ env.TEST_ENV_VAR }}
