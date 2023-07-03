@@ -23,7 +23,8 @@ jobs:
     name: Run Code
     needs: SetEnvironment
     runs-on: ubuntu-latest
-    environment: ${{ needs.SetEnvironment.output.workflow_environment }}
+    # environment: ${{ needs.SetEnvironment.output.workflow_environment }}
+    environment: development
     steps:
     - name: Use variables
       run: |
