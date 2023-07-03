@@ -17,14 +17,14 @@ jobs:
     - name: Print Environment Variable
       run: echo $ENVIRONMENT
     outputs:
-      workflow_environemnt: ${{ env.ENVIRONMENT }}
+      workflow_environment: ${{ env.ENVIRONMENT }}
 
   RunCode:
     name: Run Code
     needs: SetEnvironment
     runs-on: ubuntu-latest
-    # environment: ${{ needs.SetEnvironment.output.workflow_environment }}
-    environment: development
+    environment: ${{ needs.SetEnvironment.output.workflow_environment }}
+    #environment: development
     steps:
     - name: Use variables
       run: |
