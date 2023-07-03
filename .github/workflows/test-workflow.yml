@@ -1,0 +1,34 @@
+name: Test Github Environments
+on:
+  push:
+
+jobs:
+  SetEnvironment:
+    name: Basic checks
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Check Prod
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          GITHUB_ENVIRONMENT: production
+      
+      - name: Check Staging
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        env:
+          GITHUB_ENVIRONMENT: staging
+      
+      - name: Check Staging
+        if: ${{ github.ref == 'refs/heads/development' }}
+        env:
+          GITHUB_ENVIRONMENT: development
+
+  RunCode:
+    name: Run Code
+    runs-on: ubuntu-latest
+    environment: ${{ env.GITHUB_ENVIRONMENT }}
+    steps:
+      - name: Print env var
+        shell: bash
+        run: |
+          echo ${{ env.TEST_ENV_VAR }}
