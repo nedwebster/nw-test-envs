@@ -34,4 +34,4 @@ jobs:
     - name: Run Code
       run: sh my_script.sh
       env:
-        TEST_ENV_VAR: ${{ env.TEST_ENV_VAR }}
+        TEST_ENV_VAR: ${{ vars.TEST_ENV_VAR }}
