@@ -9,7 +9,7 @@ on:
 
 jobs:
   SetEnvironment:
-    name: Set Environment
+    name: SetEnvironment
     runs-on: ubuntu-latest
     steps:
     - name: Set Environment Variable
